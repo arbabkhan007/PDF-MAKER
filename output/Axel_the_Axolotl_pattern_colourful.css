@@ -1,0 +1,102 @@
+/* Axel the Axolotl — colourful edition overrides.
+   Layered after the base stylesheet, so plain specificity wins. */
+
+:root {
+  --ink: #38222f;
+  --ink-strong: #2b1622;
+  --ink-soft: #5d4152;
+  --muted: #a0758f;
+  --line: #f3d7e6;
+  --code-bg: #fdf0f6;
+  --accent: #d6336c;
+}
+
+/* --- full-bleed pastel cover --------------------------------- */
+@page cover {
+  background: linear-gradient(155deg, #ffd9e8 0%, #fbe3ff 38%, #e3f8f0 72%, #dff3ff 100%);
+}
+@page {
+  @top-center { color: #c084a5; }
+  @bottom-center { color: #d6336c; font-weight: 600; }
+}
+
+/* --- cover content -------------------------------------------- */
+.cover-kicker { color: #d6336c; letter-spacing: 0.3em; }
+.cover-title { color: #831843; }
+.cover-subtitle { color: #0b7285; }
+.cover-rule {
+  width: 64pt;
+  height: 3.2pt;
+  border-radius: 2pt;
+  background: linear-gradient(90deg,
+    #f59e0b, #ec4899 30%, #8b5cf6 55%, #0ea5e9 78%, #14b8a6);
+}
+.cover-meta { color: #7d5a6d; }
+.cover-meta .cover-author { color: #0ca678; }
+.cover-meta .cover-sep { color: #d9a7c0; }
+
+/* --- body text ------------------------------------------------- */
+body { color: #38222f; }
+strong { color: #a61e4d; }
+a { color: #d6336c; }
+
+/* --- rainbow section rules ------------------------------------- */
+hr {
+  border: none;
+  width: 58%;
+  height: 2.6pt;
+  border-radius: 2pt;
+  background: linear-gradient(90deg,
+    #f59e0b, #ec4899 30%, #8b5cf6 55%, #0ea5e9 78%, #14b8a6);
+}
+
+/* --- headings cycle through the palette ------------------------ */
+h1, h2, h3, h4 { color: #2b1622; }
+h2 { border-top-width: 2.2pt; }
+h2:nth-of-type(5n+1) { border-top-color: #ec4899; color: #c2255c; }
+h2:nth-of-type(5n+2) { border-top-color: #0ca678; color: #087f5b; }
+h2:nth-of-type(5n+3) { border-top-color: #8b5cf6; color: #6741d9; }
+h2:nth-of-type(5n+4) { border-top-color: #f59e0b; color: #d9480f; }
+h2:nth-of-type(5n+5) { border-top-color: #0ea5e9; color: #0b7285; }
+
+/* --- tables ----------------------------------------------------- */
+th {
+  background: #ffe0ef;
+  color: #9d174d;
+  border-bottom: 1.1pt solid #ec4899;
+}
+td { border-bottom: 0.5pt solid #f6e3ed; }
+tbody tr:nth-child(even) td { background: #fdf4f9; }
+tbody tr:last-child td { border-bottom: none; }
+
+/* round numbers pop in teal, stitch counts in pink */
+tbody td:first-child { color: #0ca678; font-weight: 600; }
+table th:first-child { color: #087f5b; }
+tbody td:nth-child(3) { color: #c2255c; font-weight: 500; }
+table th:nth-child(3) { color: #a61e4d; }
+
+/* --- blockquotes ------------------------------------------------- */
+blockquote {
+  border-left: 2.6pt solid #ec4899;
+  background: #fff5f9;
+  border-radius: 0 6pt 6pt 0;
+  padding: 7pt 10pt;
+  color: #6d3a54;
+}
+
+/* --- code -------------------------------------------------------- */
+code {
+  background: #fce7f3;
+  color: #9d174d;
+  border-radius: 3pt;
+}
+pre {
+  background: #fdf2f8;
+  border: 0.8pt solid #f9d4e6;
+  color: #862359;
+}
+pre code { background: transparent; color: inherit; }
+
+/* --- lists -------------------------------------------------------- */
+::marker { color: #ec4899; }
+ul.contains-task-list .checkbox { border-color: #0ca678; }
