@@ -8,6 +8,7 @@ import sys
 import pydyf
 
 from . import DEFAULT_OPTIONS, HTML, LOGGER, __version__
+from .markdown import MARKDOWN_EXTENSIONS, Markdown
 from .pdf import VARIANTS
 from .text.ffi import pango
 from .urls import URLFetcher
@@ -82,7 +83,9 @@ class Parser(argparse.ArgumentParser):
 
 
 PARSER = Parser(prog='weasyprint', description='Render web pages to PDF.')
-PARSER.add_argument('input', help='URL or filename of the HTML input, or - for stdin')
+PARSER.add_argument(
+    'input',
+    help='URL or filename of the HTML or Markdown input, or - for stdin')
 PARSER.add_argument('output', help='filename where output is written, or - for stdout')
 PARSER.add_argument(
     '-i', '--info', action=PrintInfo, nargs=0, help='print system information and exit')
@@ -148,6 +151,13 @@ group.add_argument(
     '-u', '--base-url',
     help='base for relative URLs in the HTML input, defaults to the '
     'input’s own filename or URL or the current directory for stdin')
+group.add_argument(
+    '--markdown', action='store_true', default=None,
+    help='treat the input as Markdown (automatic for .md, .markdown, '
+    '.mdown and .mkd files)')
+group.add_argument(
+    '--no-markdown', dest='markdown', action='store_false',
+    help='never treat the input as Markdown')
 
 group = PARSER.add_argument_group('URL fetcher options')
 group.add_argument(
@@ -223,9 +233,21 @@ def main(argv=None, stdout=None, stdin=None, HTML=HTML):  # noqa: N803
             if args.debug else '%(levelname)s: %(message)s',
             level=logging.DEBUG if args.debug else None)
 
-    html = HTML(
-        source, base_url=args.base_url, encoding=args.encoding,
-        media_type=args.media_type, url_fetcher=url_fetcher)
+    use_markdown = args.markdown
+    if use_markdown is None:
+        use_markdown = (
+            isinstance(source, str) and
+            source.lower().split('?', 1)[0].endswith(
+                MARKDOWN_EXTENSIONS))
+
+    if use_markdown:
+        html = Markdown(
+            source, base_url=args.base_url, encoding=args.encoding,
+            url_fetcher=url_fetcher)
+    else:
+        html = HTML(
+            source, base_url=args.base_url, encoding=args.encoding,
+            media_type=args.media_type, url_fetcher=url_fetcher)
     html.write_pdf(output, **options)
 
 

@@ -377,3 +377,4 @@ from .css import preprocess_stylesheet  # noqa: I001, E402
 from .html import (  # noqa: E402
     UA_COUNTER_STYLE, UA_STYLESHEET, UA_FORM_STYLESHEET, PH_STYLESHEET)
 from .document import Document, Page  # noqa: E402
+from .markdown import Markdown  # noqa: E402, F401
