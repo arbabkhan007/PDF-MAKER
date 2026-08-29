@@ -2,7 +2,10 @@
 
 WeasyPrint is a smart solution helping web developers to create PDF
 documents. It turns simple HTML pages into gorgeous statistical reports,
-invoices, tickets…
+invoices, tickets… It also converts Markdown files into polished,
+print-ready documents with a minimalist editorial design::
+
+    weasyprint report.md report.pdf
 
 From a technical point of view, WeasyPrint is a visual rendering engine for
 HTML and CSS that can export to PDF. It aims to support web standards for

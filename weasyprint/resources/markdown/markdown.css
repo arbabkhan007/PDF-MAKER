@@ -1,0 +1,597 @@
+/*
+ * WeasyPrint Markdown stylesheet — minimalist, modern, premium editorial design.
+ *
+ * Typography: IBM Plex Sans (bundled), IBM Plex Mono for code,
+ *             Noto Emoji as a fallback for emoji glyphs.
+ * Palette:    charcoal ink on white, one restrained teal accent.
+ *
+ * The font directory token is replaced with an absolute
+ * URL to the bundled fonts at generation time, so rendering
+ * never depends on system-installed fonts.
+ */
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-weight: 400;
+  font-style: normal;
+  src: url("__FONT_DIR__/IBMPlexSans-Regular.woff2");
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-weight: 400;
+  font-style: italic;
+  src: url("__FONT_DIR__/IBMPlexSans-Italic.woff2");
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-weight: 600;
+  font-style: normal;
+  src: url("__FONT_DIR__/IBMPlexSans-SemiBold.woff2");
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-weight: 700;
+  font-style: normal;
+  src: url("__FONT_DIR__/IBMPlexSans-Bold.woff2");
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-weight: 400;
+  font-style: normal;
+  src: url("__FONT_DIR__/IBMPlexMono-Regular.woff2");
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-weight: 500;
+  font-style: normal;
+  src: url("__FONT_DIR__/IBMPlexMono-Medium.woff2");
+}
+@font-face {
+  font-family: 'Noto Emoji';
+  font-weight: 400;
+  font-style: normal;
+  src: url("__FONT_DIR__/NotoEmoji.woff2");
+}
+
+:root {
+  /* Design tokens — override with a user stylesheet to re-theme. */
+  --ink: #212730;          /* body text, dark charcoal            */
+  --ink-strong: #14181f;   /* headings                            */
+  --ink-soft: #4d5561;     /* blockquotes, secondary text         */
+  --muted: #7b8390;        /* captions, header/footer, meta       */
+  --line: #e5e8ec;         /* hairline separators                 */
+  --line-strong: #2b323c;  /* table header underline              */
+  --code-bg: #f4f5f7;      /* code blocks & inline code           */
+  --accent: #0e7568;       /* the single accent color             */
+  --accent-soft: #e6f0ee;  /* very light accent tint (selection)  */
+  --serif-stack: 'IBM Plex Sans', 'DejaVu Sans', 'Noto Emoji',
+    'Noto Sans Arabic', 'Noto Sans Hebrew', 'Noto Sans Thai',
+    'Noto Sans Devanagari', 'Droid Sans Fallback', 'Noto Sans Symbols 2', sans-serif;
+  --mono-stack: 'IBM Plex Mono', 'DejaVu Sans Mono', 'Noto Emoji',
+    'Noto Sans Arabic', 'Noto Sans Thai', 'Noto Sans Devanagari',
+    'Droid Sans Fallback', 'Noto Sans Symbols 2', monospace;
+}
+
+@font-face {
+  font-family: 'Droid Sans Fallback';
+  font-weight: 400;
+  font-style: normal;
+  src: url("__FONT_DIR__/DroidSansFallback.woff2");
+}
+
+/* Fallback fonts for international text, one file per script.
+   CJK families are frequency-sliced with unicode-range, so
+   documents only pay for the glyphs they use. */
+
+/* noto-sans-arabic-arabic-400-normal */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;  font-weight: 400;
+  src: url("__FONT_DIR__/noto-sans-arabic-arabic-400-normal.woff2");
+  unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
+}
+/* noto-sans-hebrew-hebrew-400-normal */
+@font-face {
+  font-family: 'Noto Sans Hebrew';
+  font-style: normal;  font-weight: 400;
+  src: url("__FONT_DIR__/noto-sans-hebrew-hebrew-400-normal.woff2");
+  unicode-range: U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F;
+}
+/* noto-sans-thai-thai-400-normal */
+@font-face {
+  font-family: 'Noto Sans Thai';
+  font-style: normal;  font-weight: 400;
+  src: url("__FONT_DIR__/noto-sans-thai-thai-400-normal.woff2");
+  unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC;
+}
+/* noto-sans-devanagari-devanagari-400-normal */
+@font-face {
+  font-family: 'Noto Sans Devanagari';
+  font-style: normal;  font-weight: 400;
+  src: url("__FONT_DIR__/noto-sans-devanagari-devanagari-400-normal.woff2");
+  unicode-range: U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09;
+}
+/* noto-sans-symbols-2-math-400-normal */
+@font-face {
+  font-family: 'Noto Sans Symbols 2';
+  font-style: normal;  font-weight: 400;
+  src: url("__FONT_DIR__/noto-sans-symbols-2-math-400-normal.woff2");
+  unicode-range: U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF;
+}
+/* noto-sans-symbols-2-symbols-400-normal */
+@font-face {
+  font-family: 'Noto Sans Symbols 2';
+  font-style: normal;  font-weight: 400;
+  src: url("__FONT_DIR__/noto-sans-symbols-2-symbols-400-normal.woff2");
+  unicode-range: U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF;
+}
+
+/* ------------------------------------------------------------------ */
+/* Page setup                                                          */
+/* ------------------------------------------------------------------ */
+
+@page {
+  size: A4;
+  margin: 24mm 19mm 21mm 19mm;
+
+  @top-center {
+    content: string(doc-title);
+    font-family: var(--serif-stack);
+    font-size: 6.8pt;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    color: #9aa1ab;
+    text-transform: uppercase;
+    vertical-align: bottom;
+    padding-bottom: 4mm;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: var(--serif-stack);
+    font-size: 8pt;
+    color: #9aa1ab;
+    vertical-align: top;
+    padding-top: 4.5mm;
+  }
+}
+
+/* The cover page is quiet: no header, no page number. */
+@page cover {
+  @top-center { content: none; }
+  @bottom-center { content: none; }
+}
+
+/* … and so is the very first page, which either is the cover or
+   carries the title block of a compact document. */
+@page :first {
+  @top-center { content: none; }
+  @bottom-center { content: none; }
+}
+
+/* Number content pages from 1 (the cover stays unnumbered). */
+@page :nth(1 of content) {
+  counter-reset: page 1;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+html {
+  font-size: 10pt;
+}
+
+body {
+  font-family: var(--serif-stack);
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 1.62;
+  color: var(--ink);
+  hyphens: none;
+}
+
+p {
+  margin: 0 0 7.5pt;
+  orphans: 3;
+  widows: 3;
+}
+
+strong { font-weight: 600; }
+em { font-style: italic; }
+s { color: var(--muted); }
+
+small { font-size: 0.85em; }
+
+sub, sup { font-size: 0.72em; }
+
+/* ------------------------------------------------------------------ */
+/* Cover                                                               */
+/* ------------------------------------------------------------------ */
+
+.cover {
+  page: cover;
+  break-after: page;
+  padding-top: 62mm;
+}
+
+.cover-kicker {
+  font-size: 8.5pt;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 16pt;
+}
+
+.cover-title {
+  font-family: var(--serif-stack);
+  font-size: 26pt;
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.015em;
+  color: var(--ink-strong);
+  margin: 0 0 0;
+  padding: 0;
+  border: none;
+  string-set: doc-title content();
+}
+
+.cover-subtitle {
+  font-size: 12pt;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #59616d;
+  margin: 10pt 0 0;
+  max-width: 118mm;
+}
+
+.cover-rule {
+  width: 26pt;
+  height: 2.4pt;
+  background-color: var(--accent);
+  border-radius: 1.2pt;
+  margin: 22pt 0;
+}
+
+.cover-meta {
+  font-size: 9pt;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.7;
+}
+
+.cover-meta .cover-author {
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.cover-meta .cover-sep { color: #c3c9d1; padding: 0 3pt; }
+
+/* Compact documents keep the title block on the first page,
+   like a letterhead, instead of a dedicated cover page. */
+.cover.compact {
+  page: content;
+  break-after: auto;
+  padding-top: 4mm;
+  margin: 0 0 16pt;
+}
+
+.cover.compact .cover-kicker { margin-bottom: 8pt; }
+
+.cover.compact .cover-title { font-size: 20pt; }
+
+.cover.compact .cover-subtitle { font-size: 10.5pt; margin-top: 6pt; }
+
+.cover.compact .cover-rule { margin: 12pt 0; width: 22pt; }
+
+.cover.compact .cover-meta { margin-top: 0; }
+
+/* ------------------------------------------------------------------ */
+/* Content flow                                                        */
+/* ------------------------------------------------------------------ */
+
+.content {
+  page: content;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--ink-strong);
+  line-height: 1.25;
+  hyphens: none;
+  break-after: avoid-page;
+  break-inside: avoid-page;
+  margin: 18pt 0 7pt;
+}
+
+h1 {
+  font-size: 19pt;
+  letter-spacing: -0.012em;
+  margin: 26pt 0 11pt;
+}
+
+h2 {
+  font-size: 13.5pt;
+  letter-spacing: -0.006em;
+  margin-top: 24pt;
+  padding-top: 13pt;
+  border-top: 0.6pt solid var(--line);
+}
+
+/* The first section of the document does not need a separator. */
+.content > h2:first-child,
+.content > div:first-child > h2:first-child {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 11pt;
+  margin: 16pt 0 6pt;
+}
+
+h4 {
+  font-size: 10pt;
+  color: var(--ink-soft);
+  margin: 13pt 0 5pt;
+}
+
+h5, h6 {
+  font-size: 9.5pt;
+  color: var(--ink-soft);
+  margin: 12pt 0 4pt;
+}
+
+/* ------------------------------------------------------------------ */
+/* Lists                                                               */
+/* ------------------------------------------------------------------ */
+
+ul, ol {
+  margin: 2pt 0 9pt;
+  padding-left: 15pt;
+}
+
+li {
+  margin: 0 0 2.5pt;
+  orphans: 2;
+  widows: 2;
+}
+
+li > ul, li > ol {
+  margin: 2.5pt 0 1pt;
+}
+
+::marker {
+  color: #6b7480;
+}
+
+dd {
+  margin: 0 0 4pt 15pt;
+  color: var(--ink-soft);
+}
+
+dt {
+  font-weight: 600;
+}
+
+/* Task lists */
+ul.contains-task-list {
+  list-style: none;
+  padding-left: 2pt;
+}
+
+ul.contains-task-list li.task-list-item { text-indent: -13pt; padding-left: 13pt; }
+
+.checkbox {
+  display: inline-block;
+  width: 6.4pt;
+  height: 6.4pt;
+  border: 0.7pt solid var(--accent);
+  border-radius: 1.6pt;
+  background-color: #fff;
+  margin-right: 4.5pt;
+}
+
+.checkbox.checked {
+  background-color: var(--accent);
+}
+
+/* ------------------------------------------------------------------ */
+/* Links                                                               */
+/* ------------------------------------------------------------------ */
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Blockquotes                                                         */
+/* ------------------------------------------------------------------ */
+
+blockquote {
+  margin: 11pt 0;
+  padding: 1pt 0 1pt 12pt;
+  border-left: 1.8pt solid var(--accent);
+  color: var(--ink-soft);
+}
+
+blockquote p:last-child,
+blockquote ul:last-child,
+blockquote ol:last-child { margin-bottom: 0; }
+
+/* ------------------------------------------------------------------ */
+/* Code                                                                */
+/* ------------------------------------------------------------------ */
+
+code {
+  font-family: var(--mono-stack);
+  font-size: 0.86em;
+  background-color: var(--code-bg);
+  padding: 0.4pt 2.4pt;
+  border-radius: 2pt;
+  /* Prevent inherited color from syntax themes leaking inline. */
+  color: #2c333d;
+}
+
+pre {
+  font-family: var(--mono-stack);
+  font-size: 8.3pt;
+  line-height: 1.58;
+  background-color: var(--code-bg);
+  color: #2c333d;
+  border-radius: 4pt;
+  padding: 8pt 10pt;
+  margin: 10pt 0 12pt;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  break-inside: avoid-page;
+  break-after: auto;
+}
+
+pre code {
+  font-size: inherit;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
+}
+
+/* Refined, low-saturation syntax theme (Pygments token classes). */
+pre .c, pre .c1, pre .cm, pre .cs, pre .ch,
+pre .cd, pre .cpf, pre .cmt { color: #97a0aa; font-style: italic; }
+
+pre .k, pre .kc, pre .kd, pre .kn, pre .kp, pre .kr,
+pre .ow, pre .nb, pre .bp { color: var(--accent); }
+
+pre .kt, pre .nc, pre .nl, pre .no, pre .nv,
+pre .vc, pre .vg, pre .vi, pre .vm { color: #246b8f; }
+
+pre .s, pre .s1, pre .s2, pre .sa, pre .sb, pre .sc, pre .sh,
+pre .si, pre .sr, pre .ss, pre .sx, pre .se,
+pre .dl, pre .cpf { color: #7c5c24; }
+
+pre .m, pre .mh, pre .mi, pre .il, pre .mf, pre .mo,
+pre .mb, pre .mx { color: #7c5c24; }
+
+pre .nf, pre .fm { color: #303a47; }
+
+pre .nd, pre .nn, pre .na, pre .nt { color: #246b8f; }
+
+pre .o { color: #5b6570; }
+
+pre .err { color: #a3413a; }
+
+pre .gd { color: #a3413a; }
+pre .gi { color: #2f7050; }
+
+pre .gh, pre .gu { color: #4d5561; font-weight: 600; }
+
+pre .w { color: inherit; }
+
+/* ------------------------------------------------------------------ */
+/* Tables                                                              */
+/* ------------------------------------------------------------------ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10pt 0 13pt;
+  font-size: 8.8pt;
+  line-height: 1.5;
+}
+
+thead { display: table-header-group; }
+
+th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink-strong);
+  padding: 4pt 7pt 4.5pt;
+  border-bottom: 1pt solid var(--line-strong);
+}
+
+td {
+  padding: 3.6pt 7pt;
+  border-bottom: 0.5pt solid var(--line);
+  vertical-align: top;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+
+tbody tr { break-inside: avoid-page; }
+
+caption {
+  caption-side: top;
+  font-size: 8.3pt;
+  color: var(--muted);
+  text-align: left;
+  padding: 0 0 4pt;
+}
+
+/* ------------------------------------------------------------------ */
+/* Images                                                              */
+/* ------------------------------------------------------------------ */
+
+img {
+  max-width: 100%;
+  max-height: 230mm;
+}
+
+p > img:only-child {
+  display: block;
+  margin: 10pt auto 12pt;
+}
+
+figure {
+  margin: 12pt 0;
+  text-align: center;
+  break-inside: avoid-page;
+}
+
+figure img { max-width: 100%; }
+
+figcaption {
+  font-size: 8.3pt;
+  color: var(--muted);
+  margin-top: 5pt;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------------ */
+/* Horizontal rules                                                    */
+/* ------------------------------------------------------------------ */
+
+hr {
+  border: none;
+  border-top: 0.6pt solid #d9dee3;
+  width: 34%;
+  margin: 20pt auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* Embedded HTML niceties                                              */
+/* ------------------------------------------------------------------ */
+
+del { color: var(--muted); }
+mark {
+  background-color: var(--accent-soft);
+  color: var(--ink-strong);
+  padding: 0 1.5pt;
+  border-radius: 1.5pt;
+}
+kbd {
+  font-family: var(--mono-stack);
+  font-size: 0.8em;
+  border: 0.5pt solid var(--line);
+  border-bottom-width: 1pt;
+  border-radius: 2.5pt;
+  padding: 0.4pt 3pt;
+  color: var(--ink-soft);
+}
+abbr { color: inherit; }
+u { text-decoration: none; border-bottom: 0.6pt solid #b9c0c8; }
+
+/* Definition-style paragraphs used by some Markdown dialects. */
+dl { margin: 4pt 0 9pt; }

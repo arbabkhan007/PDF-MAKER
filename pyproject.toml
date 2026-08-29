@@ -20,6 +20,9 @@ dependencies = [
   'Pyphen >=0.9.1',
   'Pillow >=9.1.0',
   'fonttools[woff] >=4.59.2',
+  'markdown-it-py >=3.0.0',
+  'mdit-py-plugins >=0.4.0',
+  'Pygments >=2.16.0',
 ]
 classifiers = [
   'Development Status :: 5 - Production/Stable',

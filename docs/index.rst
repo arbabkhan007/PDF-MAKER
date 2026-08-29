@@ -11,6 +11,7 @@ WeasyPrint
 
    first_steps
    common_use_cases
+   markdown
    api_reference
    going_further
 

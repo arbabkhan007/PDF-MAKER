@@ -19,6 +19,12 @@ WeasyPrint |version| depends on:
 * Pyphen_ ≥ 0.9.1
 * Pillow_ ≥ 9.1.0
 * fontTools_ ≥ 4.59.2
+* markdown-it-py_ ≥ 3.0.0
+* mdit-py-plugins_ ≥ 0.4.0
+* Pygments_ ≥ 2.16.0
+
+The last three are used by the built-in Markdown to PDF pipeline, see
+:doc:`markdown`.
 
 .. _Python: https://www.python.org/
 .. _Pango: https://pango.org/
@@ -30,6 +36,9 @@ WeasyPrint |version| depends on:
 .. _Pyphen: https://pyphen.org/
 .. _Pillow: https://python-pillow.org/
 .. _fontTools: https://github.com/fonttools/fonttools
+.. _markdown-it-py: https://github.com/hoffstadt/markdown_it_py
+.. _mdit-py-plugins: https://github.com/executablebooks/mdit-py-plugins
+.. _Pygments: https://pygments.org/
 
 There are many ways to install WeasyPrint, depending on the system you use.
 

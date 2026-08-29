@@ -54,6 +54,8 @@ Python API
 
 .. autoclass:: HTML(input, **kwargs)
     :members:
+.. autoclass:: Markdown(input, **kwargs)
+    :members:
 .. autoclass:: CSS(input, **kwargs)
 .. autoclass:: Attachment(input, **kwargs)
 .. autodata:: DEFAULT_OPTIONS
